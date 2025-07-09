@@ -24,11 +24,28 @@ class CartViewModel(private val repo: CartRepository) : ViewModel() {
     fun addToCart(item: CartItem, context: Context) {
         viewModelScope.launch {
             repo.insertCartItem(item)
-            showCartNotification(context) //
+            showCartNotification(context)
             loadCart()
         }
     }
 
+    fun updateQuantity(productId: Int, newQuantity: Int, context: Context) {
+        viewModelScope.launch {
+            if (newQuantity > 0) {
+                repo.updateCartItemQuantity(productId, newQuantity)
+                showCartNotification(context)
+                loadCart()
+            }
+        }
+    }
+
+    fun removeFromCart(productId: Int, context: Context) {
+        viewModelScope.launch {
+            repo.removeCartItem(productId)
+            showCartNotification(context)
+            loadCart()
+        }
+    }
 
     fun clearCart() {
         viewModelScope.launch {
@@ -41,4 +58,3 @@ class CartViewModel(private val repo: CartRepository) : ViewModel() {
         return repo.getCartItemsWithProducts()
     }
 }
-

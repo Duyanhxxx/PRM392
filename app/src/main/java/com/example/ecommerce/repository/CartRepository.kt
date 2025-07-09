@@ -21,7 +21,7 @@ class CartRepository(
     }
 
     suspend fun insertCartItem(item: CartItem) = cartDao.insert(item)
+    suspend fun updateCartItemQuantity(productId: Int, newQuantity: Int) = cartDao.updateQuantity(productId, newQuantity)
+    suspend fun removeCartItem(productId: Int) = cartDao.deleteByProductId(productId)
     suspend fun clearCart() = cartDao.clearCart()
 }
-
-
