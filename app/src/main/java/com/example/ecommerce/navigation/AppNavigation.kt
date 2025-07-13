@@ -12,6 +12,7 @@ import com.example.ecommerce.ui.chat.ChatScreen
 import com.example.ecommerce.ui.checkout.CheckoutScreen
 import com.example.ecommerce.ui.splash.SplashScreen
 import com.example.ecommerce.ui.home.HomeScreen
+import com.example.ecommerce.ui.map.MapLibreScreen
 import com.example.ecommerce.ui.product_detail.ProductDetailScreen
 import com.example.ecommerce.viewmodel.AuthViewModel
 import com.example.ecommerce.viewmodel.CartViewModel
@@ -72,6 +73,10 @@ fun AppNavigation(
         }
         composable("chat") {
             ChatScreen(chatViewModel = chatViewModel)
+        }
+
+        composable("map") {
+            MapLibreScreen()
         }
     }
 }

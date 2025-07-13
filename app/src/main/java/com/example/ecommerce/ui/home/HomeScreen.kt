@@ -149,6 +149,12 @@ fun HomeScreen(
                             contentDescription = "Giỏ hàng"
                         )
                     }
+                    IconButton(onClick = { navController.navigate("map") }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_location),
+                            contentDescription = "Vị trí cửa hàng"
+                        )
+                    }
                 }
             )
         },
