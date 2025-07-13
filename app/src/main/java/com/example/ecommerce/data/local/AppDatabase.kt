@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [User::class, Product::class, CartItem::class, Message::class],
-    version = 3,
+    version = 4, // 🔺 Tăng version để reset DB nếu cần
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -34,10 +34,12 @@ abstract class AppDatabase : RoomDatabase() {
                     .also { db ->
                         INSTANCE = db
 
-                        // ✅ Preload nếu danh sách sản phẩm đang rỗng
                         scope.launch {
                             val productDao = db.productDao()
-                            if (productDao.getAllProducts().isEmpty()) {
+
+                            // ✅ Dùng count thay vì isEmpty
+                            val count = productDao.countProducts()
+                            if (count < 15) {
                                 productDao.insertAll(preloadProducts())
                             }
                         }
@@ -78,3 +80,4 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 }
+
